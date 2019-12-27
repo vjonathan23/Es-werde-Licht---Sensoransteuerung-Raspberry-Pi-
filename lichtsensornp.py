@@ -1,10 +1,10 @@
-# Import der benötigten Module
+# Import der benÃ¶tigten Module
 # Bertiebssystemsanwendung und Dateizugriff
 import os, pickle
 
 # Funktion zur Abspeicherung der Messdaten
 def messe(verzeichnis):
-    # Messwerte in eine temporäre Datei abspeichern
+    # Messwerte in eine temporÃ¤re Datei abspeichern
     befehl = "python lichtsensor.py > Messwerte_AktuellLS.txt"
     os.system(befehl)
     # Messwerte aus der Datei lesen
@@ -12,30 +12,30 @@ def messe(verzeichnis):
         data = f.readline()[:-1]
     # Falls eine Messwerte-Datei existiert:
     if os.path.exists(verzeichnis+"Messwerte.dat"):
-        # Datei zum (binären) Lesen öffnen
+        # Datei zum (binÃ¤ren) Lesen Ã¶ffnen
         h = open(verzeichnis+"Messwerte.dat","rb")
         # Inhalt lesen
         messwerte = pickle.load(h)
-        # Datei schließen
+        # Datei schlieÃŸen
         h.close()
-        # Bisherigen Messwerte ergänzen
+        # Bisherigen Messwerte ergÃ¤nzen
         messwerte.append(data)
         messwerteneu = messwerte[:]
-        # Datei zum (binären) Schreiben öffnen
+        # Datei zum (binÃ¤ren) Schreiben Ã¶ffnen
         g = open(verzeichnis+"Messwerte.dat","wb")
-        # Datei mit den Messwerten überschreiben
+        # Datei mit den Messwerten Ã¼berschreiben
         pickle.dump(messwerteneu,g)
-        # Datei schließen
+        # Datei schlieÃŸen
         g.close()
     # Andernfalls:
     else:
         # Neue Messwert-Liste erstellen
         messwerteneu = []
-        # Durch den Messwert ergänzen
+        # Durch den Messwert ergÃ¤nzen
         messwerteneu.append(data)
-        #  Messwerte-Datei zum (binären) Schreiben öffnen/erstellen
+        #  Messwerte-Datei zum (binÃ¤ren) Schreiben Ã¶ffnen/erstellen
         g = open(verzeichnis+"Messwerte.dat","wb")
-        # Messwert auf die Datei übertragen
+        # Messwert auf die Datei Ã¼bertragen
         pickle.dump(messwerteneu,g)
-        # Datei schließen
+        # Datei schlieÃŸen
         g.close()
